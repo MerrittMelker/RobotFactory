@@ -27,18 +27,16 @@ namespace RobotFactory.Domain
             var robotPart = new MockedRobotPart(RobotPartCategory.Assembly);
 
             workerDrone.PickupRobotPart(robotPart);
-            var destination = workerDrone.DropOffRobotParts();
+            workerDrone.DropOffRobotParts();
 
-            Assert.IsFalse(workerDrone.HasARobotPart());
-            Assert.AreEqual(1, destination.RobotParts.Count);
+            Assert.AreEqual(0, workerDrone.GetRobotPartCount());
 
             robotPart = new MockedRobotPart(RobotPartCategory.Weapon);
 
             workerDrone.PickupRobotPart(robotPart);
-            destination = workerDrone.DropOffRobotParts();
+            workerDrone.DropOffRobotParts();
 
-            Assert.IsFalse(workerDrone.HasARobotPart());
-            Assert.AreEqual(1, destination.RobotParts.Count);
+            Assert.AreEqual(0, workerDrone.GetRobotPartCount());
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RobotFactory.Domain
 {
     public class WorkerDrone
     {
-        protected DeliveryStrategy DeliveryStrategy { get; set; }
+        private List<DeliveryStrategy> _deliveryStrategies = new List<DeliveryStrategy>();
 
         public static DeliveryStrategy IdentifyRobotPart(RobotPart robotPart)
         {
@@ -21,19 +22,18 @@ namespace RobotFactory.Domain
 
         public void PickupRobotPart(RobotPart robotPart)
         {
-            DeliveryStrategy = IdentifyRobotPart(robotPart);
+            _deliveryStrategies.Add(IdentifyRobotPart(robotPart));
         }
 
-        public FactoryRoom DropOffRobotParts()
+        public void DropOffRobotParts()
         {
-            var factoryRoom = DeliveryStrategy.DeliverRobotParts();
-            DeliveryStrategy = null;
-            return factoryRoom;
+            foreach(var strategy in _deliveryStrategies) strategy.DeliverRobotParts();
+            _deliveryStrategies.Clear();
         }
 
-        public bool HasARobotPart()
+        public int GetRobotPartCount()
         {
-            return DeliveryStrategy != null;
+            return _deliveryStrategies.Count;
         }
     }
 }

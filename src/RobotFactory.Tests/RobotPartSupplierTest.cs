@@ -20,13 +20,5 @@ namespace RobotFactory.Domain
             Assert.AreEqual(0, robotPartSupplier.RobotParts.Count);
             Assert.AreEqual(2, deliveryBay.RobotParts.Count);
         }
-
-        private class MockedRobotPart : RobotPart
-        {
-            public MockedRobotPart()
-                : base(RobotPartCategory.Assembly)
-            {
-            }
-        }
     }
 }

@@ -21,12 +21,5 @@ namespace RobotFactory.Domain
             strategy = workerDrone.IdentifyRobotPart(robotPart);
             Assert.IsInstanceOf<WeaponRoomDeliveryStrategy>(strategy);
         }
-
-        private class MockedRobotPart : RobotPart
-        {
-            public MockedRobotPart(RobotPartCategory robotPartCategory) : base(robotPartCategory) { }
-        }
     }
-
-
 }

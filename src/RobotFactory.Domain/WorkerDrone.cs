@@ -5,7 +5,7 @@ namespace RobotFactory.Domain
 {
     public class WorkerDrone
     {
-        private List<DeliveryStrategy> _deliveryStrategies = new List<DeliveryStrategy>();
+        private readonly List<DeliveryStrategy> _deliveryStrategies = new List<DeliveryStrategy>();
 
         public static DeliveryStrategy IdentifyRobotPart(RobotPart robotPart)
         {
@@ -27,13 +27,19 @@ namespace RobotFactory.Domain
 
         public void DropOffRobotParts()
         {
-            foreach(var strategy in _deliveryStrategies) strategy.DeliverRobotParts();
+            foreach (var strategy in _deliveryStrategies) strategy.DeliverRobotParts();
             _deliveryStrategies.Clear();
+            _deliveryStrategies.Add( new DeliveryBayDeliveryStrategy());
         }
 
         public int GetRobotPartCount()
         {
             return _deliveryStrategies.Count;
+        }
+
+        public List<DeliveryStrategy> GetDeliverStrategies()
+        {
+            return _deliveryStrategies;
         }
     }
 }

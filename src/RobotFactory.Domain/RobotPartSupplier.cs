@@ -8,7 +8,7 @@ namespace RobotFactory.Domain
 
         public void DeliverRobotParts(DeliveryBay deliveryBay)
         {
-            deliveryBay.RobotParts = new List<RobotPart>(RobotParts);
+            deliveryBay.RobotParts.AddRange(RobotParts);
             RobotParts.Clear();
         }
     }

@@ -42,6 +42,7 @@
     <Compile Include="Armoury.cs" />
     <Compile Include="AssemblyRoom.cs" />
     <Compile Include="AssemblyRoomDeliveryStrategy.cs" />
+    <Compile Include="DeliveryBayDeliveryStrategy.cs" />
     <Compile Include="DeliveryStrategy.cs" />
     <Compile Include="FactoryRoom.cs" />
     <Compile Include="RobotPart.cs" />

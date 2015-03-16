@@ -1,24 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace RobotFactory.Domain
 {
     public class WorkerDrone
     {
-        public List<RobotPart> RobotParts { get; set; }
+        protected DeliveryStrategy DeliveryStrategy { get; set; }
 
-        public DeliveryStrategy IdentifyRobotPart(RobotPart robotPart)
+        public static DeliveryStrategy IdentifyRobotPart(RobotPart robotPart)
         {
             switch (robotPart.RobotPartCategory)
             {
                 case RobotPartCategory.Assembly:
-                    return new AssemblyRoomDeliveryStrategy();
+                    return new AssemblyRoomDeliveryStrategy(robotPart);
                 case RobotPartCategory.Weapon:
-                    return new WeaponRoomDeliveryStrategy();
+                    return new WeaponRoomDeliveryStrategy(robotPart);
                 default:
                     throw new NotImplementedException();
             }
+        }
 
+        public void PickupRobotPart(RobotPart robotPart)
+        {
+            DeliveryStrategy = IdentifyRobotPart(robotPart);
+        }
+
+        public FactoryRoom DropOffRobotParts()
+        {
+            var factoryRoom = DeliveryStrategy.DeliverRobotParts();
+            DeliveryStrategy = null;
+            return factoryRoom;
+        }
+
+        public bool HasARobotPart()
+        {
+            return DeliveryStrategy != null;
         }
     }
 }

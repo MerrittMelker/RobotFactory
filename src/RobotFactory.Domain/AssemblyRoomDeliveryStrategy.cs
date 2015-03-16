@@ -1,10 +1,14 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RobotFactory.Domain
+﻿namespace RobotFactory.Domain
 {
     public class AssemblyRoomDeliveryStrategy : DeliveryStrategy
     {
+        public AssemblyRoomDeliveryStrategy(RobotPart robotPart) : base(robotPart)
+        {
+        }
+
+        public override FactoryRoom GetDestination()
+        {
+            return new AssemblyRoom();
+        }
     }
 }
